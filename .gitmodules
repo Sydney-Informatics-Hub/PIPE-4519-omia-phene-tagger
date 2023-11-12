@@ -1,0 +1,3 @@
+[submodule "phenotagger"]
+	path = phenotagger
+	url = https://github.com/DUTIR-BioNLP/PhenoTagger-Updates

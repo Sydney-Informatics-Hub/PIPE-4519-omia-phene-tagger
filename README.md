@@ -12,6 +12,13 @@ are available on GitHub:
 * Version 1.1: https://github.com/ncbi-nlp/PhenoTagger
 * Version 1.2: https://github.com/DUTIR-BioNLP/PhenoTagger-Updates (looks like
   the same version that is up on [HuggingFace](https://huggingface.co/lingbionlp/PhenoTagger_v1.2))
+  * Live demo here: https://huggingface.co/spaces/lingbionlp/PhenoTagger_v1.2_Demo (not working right now?)
+
+## Original phenotagger code:
+
+For now, the original phenotagger code has been included as a git submodule under
+`phenotagger/`. This should allow us to pull in any updates from the original repo
+if needed.
 
 ## Downloading MPO
 
