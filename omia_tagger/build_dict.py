@@ -14,7 +14,6 @@ import nltk
 
 import json
 import copy
-import sys
 import os
 import argparse
 
@@ -339,7 +338,7 @@ def alt_hpo(hpo_obo, outpath):
 if __name__ == "__main__":
 
     parser = argparse.ArgumentParser(
-        description='build ontogoly dictionary, python Build_dict.py -i infile -o outpath -r rootnode')
+        description='build ontology dictionary, python build_dict.py -i infile -o outpath -r rootnode')
     parser.add_argument('--input', '-i', help="input the ontology .obo file",
                         default='../ontology/hp_202204.obo')  # hp.obo CTD_diseases.obo chebi.obo
     parser.add_argument('--output', '-o', help="the output path of dictionary", default='../dict/')
