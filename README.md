@@ -25,6 +25,8 @@ if needed.
 MPO should be available in OBO format via http://purl.obolibrary.org/obo/mp.obo -
 this link should point to the latest release of MPO.
 
+The `download_mpo.sh` script downloads this file and saves it to `data/mp.obo`
+
 ## Rough plan/architecture
 
 * The code from phenotagger can probably be adapted for our purposes - but from an
