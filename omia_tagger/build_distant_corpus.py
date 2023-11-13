@@ -36,8 +36,8 @@ def get_wordnet_pos(treebank_tag):
         return wordnet.NOUN
 
 
-def train_pos(hpo_obo, hpo_vocab, outpath):
-    fout = open(outpath + 'distant_train_pos.conll', 'w', encoding='utf-8')
+def train_pos(hpo_obo, hpo_vocab, outpath: str):
+    fout = open(os.path.join(outpath, 'distant_train_pos.conll'), 'w', encoding='utf-8')
 
     for hpoid in hpo_vocab:
         if hpoid == 'HP:None':
@@ -170,10 +170,10 @@ if __name__ == "__main__":
         description='build distant training corpus, python Build_distant_corpus.py -d dictpath -f fileneg  -n number_of_neg -o outpath')
     parser.add_argument('--dict', '-d', help="the input path of the ontology dictionary", default='../dict/')
     parser.add_argument('--fileneg', '-f', help="the text file used to generate the negatives",
-                        default='../data/mutation_disease.txt')
+                        default='data/mutation_disease.txt')
     parser.add_argument('--negnum', '-n', help="the number of negatives ", type=int, default=50000)
     parser.add_argument('--output', '-o', help="the output folder of the distantly-supervised training dataset",
-                        default='../data/distant_train_data/')
+                        default='data/distant_train_data/')
     args = parser.parse_args()
 
     if not os.path.exists(args.output):
