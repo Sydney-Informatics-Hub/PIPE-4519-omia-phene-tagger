@@ -14,8 +14,6 @@ from nltk.stem.porter import PorterStemmer
 import nltk
 import numpy as np
 import json
-import copy
-import sys
 import argparse
 import os
 
