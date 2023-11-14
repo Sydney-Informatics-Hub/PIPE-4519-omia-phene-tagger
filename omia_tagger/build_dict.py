@@ -120,7 +120,7 @@ def build_dict(hpofile, outpath, rootnode):
 
     hpo_obo = {}
     for i in range(0, len(all_obo)):
-        print("Obo File Processing:{0}%".format(round(i * 100 / len(all_obo))), end="\r")
+        print("Obo File Processing: {0}%".format(round(i * 100 / len(all_obo))), end="\r")
         lines = all_obo[i].split('\n')
         if lines[0] != '[Term]':
             continue
