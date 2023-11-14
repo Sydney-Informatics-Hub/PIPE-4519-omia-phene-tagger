@@ -6,6 +6,8 @@ Created on Mon Aug 24 10:14:27 2020
 """
 
 import argparse
+from pathlib import Path
+
 from nn_model import bioTag_CNN,bioTag_BERT
 from tensorflow.keras.optimizers import RMSprop, SGD, Adam, AdamW, Adadelta, Adagrad,Nadam
 from ml_ner import ml_intext
@@ -100,8 +102,8 @@ def CNN_training(trainfiles,vocabfiles,modelfile,EPOCH=150):
         print('The model has saved.')
             
 
-def BERT_training(trainfiles,vocabfiles,modelfile,EPOCH=100):
-    
+def BERT_training(trainfiles: dict ,vocabfiles: dict, modelfile: str | Path, vocab_dir: str | Path, EPOCH=100):
+
     bert_model=bioTag_BERT(vocabfiles)
 
   
@@ -115,9 +117,9 @@ def BERT_training(trainfiles,vocabfiles,modelfile,EPOCH=100):
 
     bert_model.model.summary()
     
-    ontfiles={'dic_file':'../dict/noabb_lemma.dic',
-              'word_hpo_file':'../dict/word_id_map.json',
-              'hpo_word_file':'../dict/id_word_map.json'}
+    ontfiles={'dic_file': os.path.join(vocab_dir, 'noabb_lemma.dic'),
+              'word_hpo_file': os.path.join(vocab_dir, 'word_id_map.json'),
+              'hpo_word_file': os.path.join(vocab_dir, 'id_word_map.json')}
     biotag_dic=dic_ont(ontfiles)
     
     max_dev=0.0
@@ -156,6 +158,7 @@ if __name__=="__main__":
     parser.add_argument('--modeltype', '-m', help="deep learning model (cnn, bioformer or biobert?)",default='bioformer')
     parser.add_argument('--output', '-o', help="the model output folder",default='../newmodels/')
     parser.add_argument("--vocab_dir", "-v", help="the directory with the ontology vocabulary", default="data/mpo_dict/")
+    parser.add_argument("--epochs", "-e", type=int, help="Number of training epochs to run", default=100)
     args = parser.parse_args()
     vocab_dir = args.vocab_dir
     
@@ -222,4 +225,4 @@ if __name__=="__main__":
         trainfiles['devfile']=args.devfile
         trainfiles['devout']=args.output+'biobert_dev_temp.tsv'
         modelfile=args.output+'biobert_PT_v1.2-new.h5'
-        BERT_training(trainfiles,vocabfiles,modelfile)
+        BERT_training(trainfiles,vocabfiles,modelfile, vocab_dir=vocab_dir, EPOCH=args.epochs)
