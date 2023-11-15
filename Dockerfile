@@ -1,4 +1,4 @@
-FROM nvidia/cuda:12.3.0-devel-ubuntu20.04
+FROM nvidia/cuda:11.2.2-cudnn8-devel-ubuntu20.04
 
 RUN apt-get update -y && \
     apt-get install -y curl git build-essential && \
@@ -14,6 +14,8 @@ RUN curl -o miniconda.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-L
 RUN mkdir /build/.conda
 RUN bash miniconda.sh -b -p /build/miniconda3
 RUN rm -rf miniconda.sh
+# Newer versions of conda have a faster dependency solver
+RUN conda update -n base conda
 
 RUN mkdir /project /scratch && touch /usr/bin/nvidia-smi
 
@@ -24,5 +26,6 @@ RUN conda env create --file environment.yml
 
 RUN conda clean -a -y
 
-SHELL ["conda", "run", "-n", "omia_tagger", "/bin/bash", "-c"]
+RUN echo "source activate omia_tagger" > ~/.bashrc
+ENV PATH /opt/conda/envs/omia_tagger/bin:$PATH
 
