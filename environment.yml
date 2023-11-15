@@ -2,6 +2,9 @@ name: omia_tagger
 channels:
   - conda-forge
   - defaults
+# These dependencies worked to get Tensorflow working
+#   on a GPU for training on my home desktop -
+#   haven't successfully dockerized them yet
 dependencies:
   - python=3.11
   - tensorflow-gpu>=2.13.1,<3.0
